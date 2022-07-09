@@ -1,3 +1,6 @@
+def light_run():
+    return 'light_run'
+
 def interval_training (week_distance, week_number):
     """
     Функция принимает объем в километрах прошлой недели, номер недели и возвращает
@@ -73,7 +76,7 @@ def increase_week_distance(week_distance, week_number):
     
     return new_week_distance
 
-def get_week_trainday(train_in_week, week_number):
+'''def get_week_trainday(train_in_week, week_number):
 
     if train_in_week == 3:
         first_train = train_T1
@@ -96,7 +99,7 @@ def get_week_trainday(train_in_week, week_number):
         else:
             fourth_train = train_T3
        
-    return (first_train, second_train, third_train, fourth_train)
+    return (first_train, second_train, third_train, fourth_train)'''
 
 def calculate_train_phases(week_for_train):
 
@@ -141,8 +144,11 @@ def calculate_train_phases(week_for_train):
 
 def create_week_plan(week_number, week_distance, train_in_week, train_phases):
 
-    
-    if week_number <= train_phases[0] + train_phases[1] and week_number > train_phases[0]:
+    if week_number <= train_phases[0]:
+        train_T1 = light_run()
+        train_T2 = light_run()
+        train_T3 = light_run()
+    elif week_number <= train_phases[0] + train_phases[1]:
         train_T1 = repeat_training(week_distance, week_number)
         train_T2 = interval_training(week_distance, week_number)
         train_T3 = tempo_training(week_distance, week_number)
@@ -162,7 +168,7 @@ def create_week_plan(week_number, week_distance, train_in_week, train_phases):
         second_train = train_T2
        
         if week_number % 2 == 0:
-            third_train = 'light_run'
+            third_train = light_run()
         else:
             third_train = train_T3
 
@@ -171,7 +177,7 @@ def create_week_plan(week_number, week_distance, train_in_week, train_phases):
 
     if train_in_week == 4:
         first_train = train_T1
-        second_train = 'light_run'
+        second_train = light_run()
         third_train = train_T2
         if week_number % 2 == 0:
             fourth_train = 'long_run'
